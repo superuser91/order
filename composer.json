@@ -1,0 +1,21 @@
+{
+  "name": "superuser91/order",
+  "description": "Ket noi shop với dịch vụ giao hàng",
+  "type": "library",
+  "require": {
+    "guzzlehttp/guzzle": "^7.1@dev"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Nguyễn Tiến Dũng",
+      "email": "dung199551@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "ShippingService\\": "src/"
+    }
+  }
+}
