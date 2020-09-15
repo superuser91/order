@@ -2,12 +2,12 @@
 
 namespace ShippingService\Couriers;
 
-class VnPost extends BaseCourier
+class VNPost extends BaseCourier
 {
     public function createShippingOrder()
     { }
 
-    public function calculateOrderFee()
+    public function calculateShippingFee()
     {
         echo 'VNPost - ' . $_GET['data'];
     }

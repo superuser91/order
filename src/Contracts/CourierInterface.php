@@ -7,7 +7,7 @@ interface CourierInterface
     /**
      * Tính phí vận chuyển đơn hàng 
      */
-    public function calculateOrderFee();
+    public function calculateShippingFee();
 
     /**
      * Tạo đơn vận chuyển

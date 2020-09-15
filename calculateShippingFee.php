@@ -1,27 +1,29 @@
 <?php
 
-use Exception;
-use ShippingService\Couriers\Factory;
-use ShippingService\ShippingService;
+use ShippingService\Couriers\CourierFactory;
+use ShippingService\OrderService;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
+require_once(__DIR__ . '/../../class/Admin.php');
 
-if (empty($_GET['courier'])) {
+if (empty($_REQUEST['courier'])) {
     header('Content-Type: application/json; charset=utf-8', true, 400);
     echo json_encode([
         'success' => false,
+        'code' => 400,
         'msg' => "Missing courier!"
     ]);
     return;
 }
 try {
-    $order = new ShippingService(Factory::getCourier($_GET['courier']));
+    $order = new OrderService(CourierFactory::getCourier($_REQUEST['courier']));
 
-    echo json_encode($order->calculateOrderFee());
+    echo json_encode($order->calculateShippingFee());
 } catch (\Throwable $e) {
     header('Content-Type: application/json; charset=utf-8', true, 400);
     echo json_encode([
         'success' => false,
+        'code' => 400,
         'msg' => $e->getMessage()
     ]);
 }

@@ -4,7 +4,7 @@ namespace ShippingService\Couriers;
 
 use Exception;
 
-class Factory
+class CourierFactory
 {
     const COURIER_NOT_FOUND = 1;
 
@@ -15,7 +15,19 @@ class Factory
                 return new GiaoHangNhanh();
                 break;
             case 'vnpost':
-                return new VnPost();
+                return new VNPost();
+                break;
+            case 'ahamove':
+                return new AhaMove();
+                break;
+            case 'ghtk':
+                return new GiaoHangTietKiem();
+                break;
+            case 'lalamove':
+                return new LaLaMove();
+                break;
+            case 'viettelpost':
+                return new ViettelPost();
                 break;
             default:
                 throw new Exception("Courier not found", self::COURIER_NOT_FOUND);

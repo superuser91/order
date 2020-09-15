@@ -2,8 +2,8 @@
 
 namespace ShippingService\Contracts;
 
-interface ShippingServiceInterface
+interface OrderServiceInterface
 {
-    public function calculateOrderFee();
+    public function calculateShippingFee();
     public function createOrder();
 }
