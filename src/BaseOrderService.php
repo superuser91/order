@@ -31,11 +31,20 @@ abstract class BaseOrderService implements OrderServiceInterface
     final public function calculateShippingFee()
     {
         try {
+            /**
+             * Gọi API của nhà cung cấp dịch vụ giao hàng
+             * Có thể bị Exception nếu HTTP Status là 400 hoặc 500
+             */
             $calculateShippingFeeResponse = $this->courier->calculateShippingFee();
 
             return json_decode($calculateShippingFeeResponse->getBody());
         } catch (RequestException $e) {
-            return json_decode($e->getResponse()->getBody());
+            /**
+             * Bắt Exception với HTTP Status là 400 và có Response từ API
+             */
+            if ($e->hasResponse()) {
+                return json_decode($e->getResponse()->getBody());
+            }
         }
     }
 
@@ -54,12 +63,18 @@ abstract class BaseOrderService implements OrderServiceInterface
              */
             $result = $this->saveCreatedShippingOrder($createShippingOrderResponse);
 
+            /**
+             * Trả về Response
+             * Tuỳ chỉnh response ở đây
+             */
             return json_decode($createShippingOrderResponse->getBody());
         } catch (RequestException $e) {
             /**
-             * Bắt Exception với HTTP Status là 400
+             * Bắt Exception với HTTP Status là 400 và có Response từ API
              */
-            return json_decode($e->getResponse()->getBody());
+            if ($e->hasResponse()) {
+                return json_decode($e->getResponse()->getBody());
+            }
         } catch (Throwable $th) {
             /**
              * Bắt các trường hợp còn lại
